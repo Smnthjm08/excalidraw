@@ -1,6 +1,16 @@
-import express from "express";
+import express, { Router } from "express";
+import { Router as ExpressRouter } from "express";
+import authRoutes from "./routes/authRoutes";
+import roomRoutes from "./routes/roomRoutes";
 
 const app = express();
+
+const v1Route: ExpressRouter = Router();
+
+app.use("api/v1", v1Route);
+
+v1Route.use("/auth", authRoutes);
+v1Route.use("/room", roomRoutes);
 
 const PORT = 5001;
 app.listen(PORT, () => {
