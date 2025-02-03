@@ -1,10 +1,10 @@
-import { Router, Router as ExpressRouter } from "express";
+import { Router, Request, Response } from "express";
 import {
   signinController,
   signUpController,
 } from "../controllers/authControllers";
 
-const authRoutes: ExpressRouter = Router();
+const authRoutes: Router = Router(); // ✅ Explicitly define type
 
 authRoutes.post("/signup", signUpController);
 authRoutes.post("/signin", signinController);
