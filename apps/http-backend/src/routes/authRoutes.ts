@@ -1,12 +1,9 @@
 import { Router, Request, Response } from "express";
-import {
-  signinController,
-  signUpController,
-} from "../controllers/authControllers";
+import { signinController, signUpController } from '../controllers/authControllers';
 
-const authRoutes: Router = Router(); // ✅ Explicitly define type
+const authRoutes: Router = Router();
 
-authRoutes.post("/signup", signUpController);
-authRoutes.post("/signin", signinController);
+authRoutes.post("/signup", signinController);
+authRoutes.post("/signin", signUpController);
 
 export default authRoutes;

@@ -1,16 +1,18 @@
 import { Request, Response } from "express";
 import jwt, { sign } from "jsonwebtoken";
-import { JWT_SECRET } from "@repo/backend-common/config";
-import { signUpSchema, signInSchema } from "@repo/common/types";
+// import { signUpSchema, signInSchema } from "@repo/common/types";
+import { prisma } from "@repo/db/client";
+
+const JWT_SECRET = "cfebvhgrenjdmwk";
 
 export const signUpController = (req: Request, res: Response) => {
   try {
     // TODO signup
     //db call
-    const data = signUpSchema.safeParse(req.body);
-    if (!data.success) {
-      res.status(400).json({ message: "Please enter valid inputs" });
-    }
+    // const data = signUpSchema.safeParse(req.body);
+    // if (!data.success) {
+    //   res.status(400).json({ message: "Please enter valid inputs" });
+    // }
 
     res.status(200).json("Sign up endpoint");
   } catch (error) {
@@ -20,7 +22,7 @@ export const signUpController = (req: Request, res: Response) => {
 
 export const signinController = (req: Request, res: Response) => {
   const { username, email, password } = req.body;
-  const data = signInSchema.safeParse(req.body);
+  // const data = signInSchema.safeParse(req.body);
   const userId = "exampleUserId";
   try {
     // TODO sigin
