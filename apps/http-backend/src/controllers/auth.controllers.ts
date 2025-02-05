@@ -26,7 +26,7 @@ export const signUpController: RequestHandler = async ( req: Request, res: Respo
     });
 
     if (userExists) {
-      res.status(400).json({ error: "User with this email already exists" });
+      res.status(400).json({ error: "User with this email/username already exists" });
       return;
     }
 
