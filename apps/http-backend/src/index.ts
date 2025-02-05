@@ -1,8 +1,11 @@
+import "dotenv/config"
+
 import express, { Router } from "express";
 import authRoutes from "./routes/authRoutes";
 import roomRoutes from "./routes/roomRoutes";
 
 const app = express();
+app.use(express.json());
 
 const v1Route = Router(); 
 
