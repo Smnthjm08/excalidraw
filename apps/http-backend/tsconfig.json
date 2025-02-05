@@ -3,5 +3,8 @@
   "compilerOptions": {
       "rootDir": "./src",
       "outDir": "./dist",
-  }
+  },
+  "paths": {
+      "@repo/common": ["packages/common/src"]
+    }
 }

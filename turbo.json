@@ -4,7 +4,9 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "index.ts"],
+      "env": ["JWT_SECRET", "MY_API_KEY"]
+
     },
     "lint": {
       "dependsOn": ["^lint"]
