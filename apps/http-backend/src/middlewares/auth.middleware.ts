@@ -1,20 +1,27 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
-// import { JWT_SECRET } from "@repo/backend-common/config";
+// import  JWT_SECRET  from '@repo/backend-common/config';
 
-const JWT_SECRET = "dvcdehcnvefijn";
+const JWT_SECRET = process.env.JWT_SECRET || "secret";
 
-export function middleware(req: Request, res: Response, next: NextFunction) {
-  const token = req.headers["authorization"] ?? "";
+export function  authMiddleware(req: Request, res: Response, next: NextFunction) {
+  const token = req.header('Authorization')?.replace('Bearer ', '');
 
-  const decoded = jwt.verify(token, JWT_SECRET);
+  if (!token) {
+     res.status(401).json({ message: "No token provided" });
+  }
 
-  if (decoded) {
-    //@ts-ignore TODO middleware complete fix
+  try {
+    // @ts-ignore
+    const decoded = jwt?.verify(token, JWT_SECRET) as { userId: string };
+
+    // @ts-ignore
     req.userId = decoded.userId;
-    next();
-    //   if (decoded?.userId) {
-  } else {
+
+    next(); 
+  } catch (err) {
+    console.error("JWT verification failed:", err);
     res.status(403).json({ message: "Unauthorized" });
   }
 }
+

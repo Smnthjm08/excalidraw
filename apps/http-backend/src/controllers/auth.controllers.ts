@@ -4,9 +4,12 @@ import { prisma } from "@repo/db/client";
 import { Request, Response, RequestHandler } from "express";
 
 // TODO - pending env
-// const JWT_SECRET = "cfegbuhndijwxms"; // Make sure you have this in your .env file
+const JWT_SECRET = "secret";
 
-export const signUpController: RequestHandler = async ( req: Request, res: Response ): Promise<void> => {
+export const signUpController: RequestHandler = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   try {
     const parsedData = signUpSchema.safeParse(req.body);
 
@@ -26,7 +29,9 @@ export const signUpController: RequestHandler = async ( req: Request, res: Respo
     });
 
     if (userExists) {
-      res.status(400).json({ error: "User with this email/username already exists" });
+      res
+        .status(400)
+        .json({ error: "User with this email/username already exists" });
       return;
     }
 
@@ -39,7 +44,7 @@ export const signUpController: RequestHandler = async ( req: Request, res: Respo
       },
     });
 
-    const token = jwt.sign({ userId: user.id }, "cfegbuhndijwxms", {
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
       expiresIn: "1h",
     });
 
@@ -50,7 +55,10 @@ export const signUpController: RequestHandler = async ( req: Request, res: Respo
   }
 };
 
-export const signInController: RequestHandler = async ( req: Request, res: Response ): Promise<void> => {
+export const signInController: RequestHandler = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
   const parsedData = signInSchema.safeParse(req.body);
 
   if (!parsedData.success) {
@@ -79,7 +87,7 @@ export const signInController: RequestHandler = async ( req: Request, res: Respo
       return;
     }
 
-    const token = jwt.sign({ userId: user.id }, "cfegbuhndijwxms", {
+    const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
       expiresIn: "1h",
     });
 
