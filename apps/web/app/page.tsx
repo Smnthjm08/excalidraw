@@ -1,8 +1,9 @@
+import { TopBar } from "../components/topbar";
 
 export default function Home() {
   return (
     <main className="flex flex-col items-center justify-between min-h-screen p-24 text-gray-50">
-      Hello
+      <TopBar />
     </main>
-  )
+  );
 }

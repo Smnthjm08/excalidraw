@@ -15,7 +15,7 @@ import { signInSchema } from "@repo/common/schema";
 import { useState } from "react";
 import axios from "axios";
 
-export default function SignIn() {
+export default function SignInPage() {
   const [emailOrUsername, setEmailOrUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -58,7 +58,7 @@ export default function SignIn() {
         <div>
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Login</CardTitle>
+              <CardTitle className="text-2xl text-center">Sign In</CardTitle>
               <CardDescription className="text-center">
                 Enter your email or username below to login to your account
               </CardDescription>
@@ -66,6 +66,7 @@ export default function SignIn() {
             <CardContent>
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-col gap-6">
+                  
                   <div className="grid gap-2">
                     <Label htmlFor="emailOrUsername">Email or username</Label>
                     <Input

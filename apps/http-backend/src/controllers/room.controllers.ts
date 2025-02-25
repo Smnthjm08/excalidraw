@@ -63,3 +63,31 @@ export const getRoomsController = async (req: Request, res: Response) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const getRoomIdController = async (req: Request, res: Response) => {
+  try {
+    const slug = req.params.slug;
+    if (typeof slug !== "string") {
+      res.status(400).json({
+        error: "Invalid data",
+      });
+      return;
+    }
+
+    const room = await prisma.room.findFirst({
+      where: {
+        slug: slug,
+      },
+    });
+
+    if (!room) {
+      res.status(404).json({ message: "Room not found" });
+      return;
+    }
+
+    res.status(200).json(room.id);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
