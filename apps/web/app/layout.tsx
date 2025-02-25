@@ -1,8 +1,11 @@
 import "@ui/styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ThemeProvider } from "../components/providers/theme-provider";
+import AppBar from "../components/globals/appbar";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
+const luckiestGuy = Inter({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Create Turborepo",
@@ -15,8 +18,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressContentEditableWarning suppressHydrationWarning>
+      <body className={luckiestGuy.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <AppBar />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
