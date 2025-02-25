@@ -50,3 +50,16 @@ export const createRoomController = async (
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+export const getRoomsController = async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    const adminId = req.userId;
+
+    const data = await prisma.room.findMany({ where: { adminId: adminId } });
+    res.status(200).json(data);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};

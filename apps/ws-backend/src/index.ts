@@ -1,4 +1,4 @@
-import { prisma } from '@repo/db/client';
+import { prisma } from "@repo/db/client";
 import { WebSocketServer, WebSocket } from "ws";
 import jwt, { JwtPayload } from "jsonwebtoken";
 
@@ -81,9 +81,9 @@ wss.on("connection", function connection(ws, request) {
         data: {
           roomId,
           message,
-          userId
-        }
-      })
+          userId,
+        },
+      });
 
       users.forEach((user) => {
         if (user.rooms.includes(roomId)) {
